@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import Button from '../../components/Button';
-import Header from '../../components/Header';
 import Input from '../../components/Input'
 import { IForm, IUserData } from './types';
 import { login } from '../../services/login';
@@ -48,11 +47,9 @@ function Home() {
   }
 
   return (
-    <>
-    <Header />
-    <main className='container mx-auto mt-3 flex flex-col bg-white p-3 justify-between rounded-lg'>
+    <div className='container mx-auto mt-3 flex flex-col bg-white p-3 justify-between rounded-lg'>
 
-      { userData === null || userData === undefined && <h1 className='text-3xl'>Loading...</h1> }
+      { /* userData === null || userData === undefined && <h1 className='text-3xl'>Loading...</h1> */ }
 
       <h1 className='text-center text-blue-900 text-3xl font-semibold underline'>Faça o login</h1>
       <form className='w-1/2 mx-auto mt-3 flex flex-col' onSubmit={handleSubmit(onSubmit)} id='formLogin'>
@@ -89,8 +86,7 @@ function Home() {
           disabled={!isValid}
           /> 
       </form>
-    </main>
-    </>
+    </div>
   )
 }
 

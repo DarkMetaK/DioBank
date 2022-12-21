@@ -3,6 +3,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom'
+import Layout from './components/Layout';
+import Conta from './pages/Conta';
 import Home from './pages/Home';
 
 import './styles/main.css';
@@ -10,9 +12,12 @@ import './styles/main.css';
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path='/' element={<Home />}/>
-      </Routes>
+      <Layout>
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/conta' element={<Conta />}/>
+          </Routes>
+      </Layout>
     </Router>
   )
 }
