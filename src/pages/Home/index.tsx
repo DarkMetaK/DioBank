@@ -49,14 +49,14 @@ function Home() {
     const password = formData.get('password')
     
     const result = await login(email as string, password as string)
-    if(result) nav('/conta')
+    if(result) nav(`/conta/${userData?.id}`)
   }
 
   return (
     <div className='container mx-auto mt-3'>
-      <Card extraStyle='justify-between'>
+      <Card extraStyle='justify-between mx-3'>
         <h1 className='text-center text-blue-900 text-3xl font-semibold underline'>Faça o login</h1>
-        <form className='w-1/2 mx-auto mt-3 flex flex-col' onSubmit={handleSubmit(onSubmit)} id='formLogin'>
+        <form className='w-full mt-3 flex flex-col sm:w-1/2 sm:mx-auto' onSubmit={handleSubmit(onSubmit)} id='formLogin'>
           <Input
             control= {control}
             errorMessage = {errors.email ? errors.email.message : null}

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import InfoCard from '../../components/InfoCard'
 
 import { api } from '../../api'
 import { IUserData } from '../../types/api.types'
 import Spinner from '../../components/Spinner'
-
 
 function Conta() {
 
@@ -18,6 +18,13 @@ function Conta() {
     }
     getData()
   }, [])
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  if(userData && id !== userData.id) {
+    navigate('/');
+  }
 
   const acessDate = new Date()
 

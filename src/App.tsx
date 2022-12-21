@@ -15,7 +15,7 @@ function App() {
       <Layout>
           <Routes>
             <Route path='/' element={<Home />}/>
-            <Route path='/conta' element={<Conta />}/>
+            <Route path='/conta/:id' element={<Conta />}/>
           </Routes>
       </Layout>
     </Router>
