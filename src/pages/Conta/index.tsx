@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+
+import { LoginContext } from '../../context/auth'
 
 import InfoCard from '../../components/InfoCard'
 
@@ -9,7 +11,13 @@ import Spinner from '../../components/Spinner'
 
 function Conta() {
 
-  const [userData, setUserData] = useState<null | IUserData>()
+  const [userData, setUserData] = useState<null | IUserData>();
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { isLoggedIn } = useContext(LoginContext);
+  !isLoggedIn && navigate('/')
 
   useEffect(() => {
     const getData = async() => {
@@ -18,9 +26,6 @@ function Conta() {
     }
     getData()
   }, [])
-
-  const { id } = useParams();
-  const navigate = useNavigate();
 
   if(userData && id !== userData.id) {
     navigate('/');
