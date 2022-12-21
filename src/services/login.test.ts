@@ -13,6 +13,11 @@ describe('login', () => {
         expect(mockAlert).toHaveBeenCalledWith(`Bem-vindo ${mockEmail}`)
     })
 
+    it('Deve retornar true caso os dados sejam válidos', async () => {
+        const result = await login(mockEmail, mockPassword)
+        expect(result).toBe(true)
+    })
+
     it('Não deve exibir a mensagem de boas vindas sem o email', () => {
         login(mockEmail, mockPassword)
         expect(mockAlert).not.toHaveBeenCalledWith('Bem-vindo')

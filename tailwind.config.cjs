@@ -8,7 +8,10 @@ module.exports = {
     extend: {},
     fontFamily: {
       sans: ['Open Sans', 'sans-serif']
-    },
+    }
   },
+  safelist: [
+    'defaultStyle'
+  ],
   plugins: [],
 }
