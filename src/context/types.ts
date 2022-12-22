@@ -1,6 +1,10 @@
+import { IUserData } from "../types/api.types";
+
 export interface ILoginContext {
-  user: string;
+  user: IUserData | null;
+  setUser: (user: IUserData | null) => void;
   isLoggedIn: boolean;
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
 }
 
 export interface ILoginContextProvider {

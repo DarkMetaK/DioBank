@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -7,31 +7,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../components/Button';
 import Input from '../../components/Input'
 import Card from '../../components/Card';
-import { IForm } from './types';
-import { login } from '../../services/login';
 
+import { login } from '../../services/login';
 import { api } from '../../api';
+import { IForm } from './types';
 import { IUserData } from '../../types/api.types';
+
+import { LoginContext } from '../../context/auth';
 
 function Home() {
 
-  const [userData, setUserData] = useState<null | IUserData>()
-
-  useEffect(() => {
-    const getData = async() => {
-      const data: any | IUserData = await api
-      setUserData(data)
-    }
-    getData()
-  }, [])
-
-  const nav = useNavigate();
+  const [userData, setUserData] = useState<null | IUserData>();
+  const {setIsLoggedIn, setUser} = useContext(LoginContext);
+  const navigate = useNavigate();
 
   const schema = yup.object({
     email: yup.string().email('E-mail inválido').required('Esse campo é obrigatório'),
     password: yup.string().min(6, 'Insira ao menos 6 caracteres').required('Esse campo é obrigatório')
-  })
-
+  });
   const { 
     control, 
     handleSubmit, 
@@ -41,15 +34,30 @@ function Home() {
     mode: 'onChange'
   });
 
+  useEffect(() => {
+    const getData = async() => {
+      const data: any | IUserData = await api;
+      setUserData(data);
+    }
+    getData();
+  }, []);
+
   async function onSubmit(): Promise<void> {
-    const loginForm = document.getElementById('formLogin')
+    const loginForm = document.getElementById('formLogin');
     const formData = new FormData(loginForm as HTMLFormElement);
     
-    const email = formData.get('email')
-    const password = formData.get('password')
+    const email = formData.get('email');
+    const password = formData.get('password');
     
-    const result = await login(email as string, password as string)
-    if(result) nav(`/conta/${userData?.id}`)
+    const result = await login(email as string, password as string);
+
+    if(result) {
+      setIsLoggedIn(true);
+      setUser(userData as IUserData);
+      navigate(`/conta/${userData?.id}`);
+    } else {
+      alert('Dados inválidos!');
+    }
   }
 
   return (

@@ -1,30 +1,34 @@
 import { login } from "./login";
 
+/* const mockSetIsLoggedIn = jest.fn()
+const mockUseNavigate = jest.fn()
+
+jest.mock('react', () => ({
+    ...jest.requireActual('react'),
+    useContext: () => ({
+        setIsLoggedIn: mockSetIsLoggedIn
+    })
+}))
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom') as any,
+    useNavigate: () => mockUseNavigate
+})) */
+
 describe('login', () => { 
 
-    const mockAlert = jest.fn();
-    window.alert = mockAlert;
+  it('Deve mudar o estado de login e redirecionar, caso os dados estejam corretos', async () => {
+      const response = await login('matporto03@gmail.com', '123456')
+      expect(response).toBeTruthy();
+      /*expect(mockSetIsLoggedIn).toHaveBeenCalledWith(true)
+      expect(mockUseNavigate).toHaveBeenCalledWith('/1')*/
+  })
 
-    const mockEmail = 'matporto03@gmail.com';
-    const mockPassword = '123456';
+  it('Não deve mudar o estado de login, nem redirecionar caso os dados estejam incorretos', async() => {
+      const response = await login('email@invalido.com', '123456')
+      expect(response).toBeFalsy()
+      /*expect(mockSetIsLoggedIn).not.toHaveBeenCalled
+      expect(mockUseNavigate).not.toHaveBeenCalled*/
+  })
 
-    it('Deve dar mensagem de bem-vindo, caso o e-mail seja válido', async () => {
-        await login(mockEmail, mockPassword)
-        expect(mockAlert).toHaveBeenCalledWith(`Bem-vindo ${mockEmail}`)
-    })
-
-    it('Deve retornar true caso os dados sejam válidos', async () => {
-        const result = await login(mockEmail, mockPassword)
-        expect(result).toBe(true)
-    })
-
-    it('Não deve exibir a mensagem de boas vindas sem o email', () => {
-        login(mockEmail, mockPassword)
-        expect(mockAlert).not.toHaveBeenCalledWith('Bem-vindo')
-    })
-
-    it('Deve exibir um erro caso os dados sejam inválidos', async() => {
-        await login('email@invalido.com', '123456')
-        expect(mockAlert).toHaveBeenCalledWith('Dados inválidos')
-    })
- })
+})
