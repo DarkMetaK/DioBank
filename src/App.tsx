@@ -1,12 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+
 import Layout from './components/Layout';
+import MainRoutes from './routes';
+
 import { LoginContextProvider } from './context/auth';
-import Conta from './pages/Conta';
-import Home from './pages/Home';
 
 import './styles/main.css';
 
@@ -15,10 +12,7 @@ function App() {
     <Router>
       <LoginContextProvider>
         <Layout>
-            <Routes>
-              <Route path='/' element={<Home />}/>
-              <Route path='/conta/:id' element={<Conta />}/>
-            </Routes>
+            <MainRoutes />
         </Layout>
       </LoginContextProvider>
     </Router>

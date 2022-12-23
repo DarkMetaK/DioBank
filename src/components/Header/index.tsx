@@ -15,6 +15,8 @@ function Header() {
     navigate('/');
   }
 
+  console.log(isLoggedIn)
+
   return (
     <header className="w-full bg-blue-300 p-6 text-white text-center">
       <Link className="text-2xl font-semibold" to='/'>DIO BANK</Link>
