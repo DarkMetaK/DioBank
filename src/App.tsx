@@ -6,8 +6,12 @@ import MainRoutes from './routes';
 import { LoginContextProvider } from './context/auth';
 
 import './styles/main.css';
+import { createLocalStorage, getAllLocalStorage } from './services/Storage/storage';
 
 function App() {
+
+  !getAllLocalStorage() && createLocalStorage();
+
   return (
     <Router>
       <LoginContextProvider>

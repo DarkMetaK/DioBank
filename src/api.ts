@@ -1,3 +1,5 @@
+import { IUserData } from "./types/api.types"
+
 const conta = {
     id: '1',
     email: 'matporto03@gmail.com',
@@ -6,7 +8,7 @@ const conta = {
     balance: 2000
 }
 
-export const api = new Promise((resolve) => {
+export const api: Promise<IUserData> = new Promise((resolve) => {
     setTimeout(() => {
         resolve(conta)
     }, 1500)

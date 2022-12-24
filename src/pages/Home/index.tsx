@@ -8,16 +8,17 @@ import Button from '../../components/Button';
 import Input from '../../components/Input'
 import Card from '../../components/Card';
 
-import { login } from '../../services/login';
+import { login } from '../../services/Login/login';
 import { api } from '../../api';
 import { IForm } from './types';
-import { IUserData } from '../../types/api.types';
+import { IUserData, IUserDataStorage } from '../../types/api.types';
 
 import { LoginContext } from '../../context/auth';
+import { changeLocalStorage } from '../../services/Storage/storage';
 
 function Home() {
 
-  const [userData, setUserData] = useState<null | IUserData>();
+  const [userData, setUserData] = useState<IUserDataStorage>();
   const {setIsLoggedIn, setUser} = useContext(LoginContext);
   const navigate = useNavigate();
 
@@ -34,12 +35,11 @@ function Home() {
     mode: 'onChange'
   });
 
-  useEffect(() => {
-    const getData = async() => {
-      const data: any | IUserData = await api;
-      setUserData(data);
-    }
-    getData();
+  useEffect((): void => {
+    (async() => {
+      const {id, email, balance, name}: IUserData = await api;
+      setUserData({id, email, balance, name});
+    })()
   }, []);
 
   async function onSubmit(): Promise<void> {
@@ -49,11 +49,17 @@ function Home() {
     const email = formData.get('email');
     const password = formData.get('password');
     
-    const result = await login(email as string, password as string);
+    const databaseResponse = await login(email as string, password as string);
 
-    if(result) {
+    if(databaseResponse) {
       setIsLoggedIn(true);
-      setUser(userData as IUserData);
+      setUser(userData as IUserDataStorage);
+
+      changeLocalStorage({
+        login: true,
+        user: userData as IUserDataStorage
+      })
+      
       navigate(`/conta/${userData?.id}`);
     } else {
       alert('Dados inválidos!');

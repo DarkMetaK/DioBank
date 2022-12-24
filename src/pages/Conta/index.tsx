@@ -6,12 +6,12 @@ import { LoginContext } from '../../context/auth'
 import InfoCard from '../../components/InfoCard'
 
 import { api } from '../../api'
-import { IUserData } from '../../types/api.types'
+import { IUserData, IUserDataStorage } from '../../types/api.types'
 import Spinner from '../../components/Spinner'
 
 function Conta() {
 
-  const [userData, setUserData] = useState<null | IUserData>();
+  const [userData, setUserData] = useState<IUserDataStorage>();
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,13 +19,12 @@ function Conta() {
   const { isLoggedIn } = useContext(LoginContext);
   !isLoggedIn && navigate('/')
 
-  useEffect(() => {
-    const getData = async() => {
-      const data: any | IUserData = await api
-      setUserData(data)
-    }
-    getData()
-  }, [])
+  useEffect((): void => {
+    (async() => {
+      const {id, email, balance, name}: IUserData = await api;
+      setUserData({id, email, balance, name});
+    })()
+  }, []);
 
   if(userData && id !== userData.id) {
     navigate('/');

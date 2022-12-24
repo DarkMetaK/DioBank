@@ -5,3 +5,10 @@ export interface IUserData {
     name: string;
     balance: number;
 }
+
+export interface IUserDataStorage {
+  id: string;
+  email: string;
+  name: string;
+  balance: number;
+}
