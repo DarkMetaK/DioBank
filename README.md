@@ -30,6 +30,7 @@
       </ul>
     </li>
     <li><a href="#contato">Contato</a></li>
+    <li><a href="#agradecimentos">Agradecimentos</a></li>
   </ol>
 </details>
 
@@ -54,6 +55,8 @@ Esse site foi desenvolvido durante a trilha de Typescript da plataforma Digital 
 [![React][React.js]][React-url]<br>
 [![TypeScript][TypeScript.js]][TypeScript-url]
 
+<p align="right">(<a href="#readme-top">Retornar ao topo</a>)</p>
+
 <!-- GETTING STARTED -->
 ## Como rodar o projeto
 
@@ -76,7 +79,7 @@ Para realizar a simulação de login, utilize as seguintes credenciais:
 * E-mail: matporto03@gmail.com
 * Senha: 123456
 
-
+<p align="right">(<a href="#readme-top">Retornar ao topo</a>)</p>
 
 <!-- CONTACT -->
 ## Contato
@@ -87,7 +90,16 @@ Link Repositório: [https://github.com/DarkMetaK/React-TypeScript](https://githu
 
 <p align="right">(<a href="#readme-top">Retornar ao topo</a>)</p>
 
+## Agradecimentos
 
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+* [Img Shields](https://shields.io)
+* [React Icons](https://react-icons.github.io/react-icons/search)
+* [TailWind CSS](https://tailwindcss.com/)
+* [React Hook Form](https://react-hook-form.com/)
+* [React Router](https://reactrouter.com/en/main)
+
+<p align="right">(<a href="#readme-top">Retornar ao topo</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [product-screenshot]: public/diobank.jpg
